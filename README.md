@@ -3,7 +3,7 @@
 An app for checking the current weather, as well as the weather for the next few days, implemented using ASP.NET MVC and Bootstrap.
 
 ![Home screen](Images/image_1.PNG)
-![Weather in Albuquerque](Images/image_2.PNG)
+![Weather in Albuquerque](Images/image_2.png)
 ![Weather in Tokyo](Images/image_3.PNG)
 
 

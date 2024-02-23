@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Weather App";
+}
+
+@model WeatherApp.Models.WeatherAndForecast
+
+<!-- Creates search bar -->
+<div class="row text-center mt-4">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        @Html.TextBox("searchInput", null, new { @class = "w-50", placeholder = "Enter a location..." })
+
+        <input style="background-color: rgba(0,0,0,0.3); border: none; color: white; margin: 0" type="submit" value="Search" />
+    }
+</div>
+
+<!-- Checks if data exists, or else it asks user to search -->
+@if (Model != null)
+{
+    <!-- If the location's time is night, set a nighttime background -->
+    @if (Model.currentWeather.weather[0].icon[2] == 'n')
+    {
+        <style>
+            body {
+                background-image: linear-gradient(to bottom, rgba(167, 255, 255, 0), rgba(89, 71, 183, 0.7)), url('https://images.unsplash.com/photo-1525675447052-268791afe208?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            }
+        </style>
+    }
+
+    <!-- Draws main panel, based on current weather information -->
+    <div class="col-6 justify-content-center mx-auto" style="background: rgba(0,0,0,0.3); border-radius: 10px">
+        <h1 class="text-center mt-3">@Model.currentWeather.name</h1>
+        <br />
+        <img class="img-fluid mx-auto d-block" src='@("https://openweathermap.org/img/wn/"+Model.currentWeather.weather[0].icon+"@2x.png")' class="img-fluid" alt="Responsive image">
+        <h3 class="text-center">@Model.currentWeather.weather[0].main</h3>
+        <br />
+        <h2 class="text-center">It is currently @Model.currentWeather.main.temp° F</h2>
+        <h6 class="text-center">Feels like @Model.currentWeather.main.feels_like° F!</h6>
+        <h6 class="text-center">@Model.currentWeather.main.humidity% Humidity</h6>
+
+        <br />
+    </div>
+
+    <br />
+    <br />
+
+    <!-- Draws secondary panels, based on projected forecast information -->
+    <div class="container-fluid">
+        <div class="row">
+            @for (int i = 4; i < Model.forecast.list.Count; i = i + 8)
+            {
+                <div class="col m-2" style="background: rgba(0,0,0,0.3); border-radius: 10px">
+                    <h5 class="text-center mt-2">@Model.forecast.list[i].dt_txt.Substring(0, 10)</h5>
+                    <img class="img-fluid mx-auto d-block" src='@("https://openweathermap.org/img/wn/"+Model.forecast.list[i].weather[0].icon+".png")' class="img-fluid" alt="Responsive image">
+                    <h6 class="text-center">@Model.forecast.list[i].weather[0].main</h6>
+                    <h5 class="text-center">@Model.forecast.list[i].main.temp° F</h5>
+                    <h6 class="text-center">@Model.forecast.list[i].main.humidity% Humidity</h6>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <h1 class="text-center mt-5">Search for a location to begin!</h1>
+    </div>
+}

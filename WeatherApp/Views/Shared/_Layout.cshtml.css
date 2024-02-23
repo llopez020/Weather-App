@@ -1,0 +1,15 @@
+﻿.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    background-size: cover;
+}
+
+.search-button {
+    border-style: none;
+}
+
+.search-bar {
+    border-style: none;
+}

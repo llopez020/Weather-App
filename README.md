@@ -9,7 +9,7 @@ An app for checking the current weather, as well as the weather for the next few
 
 
 ## Technologies
-.Net, C#, ASP.NET, HTML, Bootstrap
+.Net, C#, ASP.NET MVC, HTML, CSS, Bootstrap
 
 ## Features
 - Search for a location to check the weather and forecast at that location
